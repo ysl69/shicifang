@@ -1,6 +1,5 @@
 package com.tensquare.recruit.controller;
 
-import com.sun.org.apache.regexp.internal.RE;
 import com.tensquare.recruit.pojo.Recruit;
 import com.tensquare.recruit.service.RecruitService;
 import entity.Result;

@@ -36,3 +36,4 @@ public interface ProblemDao extends JpaRepository<Problem,String>, JpaSpecificat
     @Query("select p from Problem p where id in(select peoblemid from pl where labelid=?1) order by reply desc ")
     public Page<Problem> findHotListByLabelId(String labelId, Pageable pageable);
 }
+

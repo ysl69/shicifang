@@ -5,8 +5,13 @@ import com.tensquare.qa.pojo.Problem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import sun.misc.BASE64Decoder;
+import sun.misc.BASE64Encoder;
+
+import java.io.IOException;
+import java.util.Base64;
+
 
 /**
  * @Author ysl
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ProblemService {
+
 
     @Autowired
     private ProblemDao problemDao;
@@ -45,6 +51,4 @@ public class ProblemService {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.findHotListByLabelId(lableId,pageRequest);
     }
-
-
 }
