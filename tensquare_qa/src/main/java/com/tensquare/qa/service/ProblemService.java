@@ -30,4 +30,19 @@ public class ProblemService {
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.findNewListByLabelId(labelId,pageRequest);
     }
+
+
+
+
+    /**
+     * 根据标签ID查询热门问题列表
+     * @param labelId 标签ID
+     * @param page  页码
+     * @param size  页大小
+     * @return
+     */
+    public Page<Problem> findHotListByLabelId(String labelId,int page,int size){
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        return problemDao.findHotListByLaelId(labelId,pageRequest);
+    }
 }

@@ -42,4 +42,17 @@ public class ProblemController {
     }
 
 
+    /**
+     * 根据标签ID查询热门问题列表
+     * @param labelid
+     * @param page
+     * @param size
+     * @return
+     */
+    @RequestMapping(value = "/hotlist/{labelid}/{page}/{size}")
+    public Result findHotListByLabelId(@PathVariable String labelid,@PathVariable int page,@PathVariable int size){
+        Page<Problem> pageList = problemService.findHotListByLabelId(labelid, page, size);
+        PageResult<Problem> pageResult = new PageResult<>(pageList.getTotalElements(), pageList.getContent());
+        return new Result(true,StatusCode.OK,"查询成功",pageResult);
+    }
 }
