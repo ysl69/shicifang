@@ -43,6 +43,19 @@ public class ProblemService {
      */
     public Page<Problem> findHotListByLabelId(String labelId,int page,int size){
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        return problemDao.findHotListByLaelId(labelId,pageRequest);
+        return problemDao.findHotListByLabelId(labelId,pageRequest);
+    }
+
+
+    /**
+     * 根据标签ID查询等待回答列表
+     * @param labelId   标签ID
+     * @param page  页码
+     * @param size  页大小
+     * @return
+     */
+    public Page<Problem> findWaitListByLabelId(String labelId,int page,int size){
+        PageRequest pageRequest = PageRequest.of(page - 1, size);
+        return problemDao.findWaitListByLabelId(labelId,pageRequest);
     }
 }
