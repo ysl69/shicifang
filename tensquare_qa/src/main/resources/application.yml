@@ -2,7 +2,7 @@ server:
   port: 9003
 spring:
   application:
-    name: tensquare-qa #指定服务名
+    name: tensquare-base #指定服务名
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url:  jdbc:mysql://192.168.25.143:3306/tensquare_qa?characterEncoding=utf-8
@@ -12,3 +12,4 @@ spring:
     database: mysql
     show-sql: true
     generate-ddl: true
+

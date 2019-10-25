@@ -7,78 +7,80 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author ysl
- * @Date 2019/9/22 10:49
- * @Description:
- **/
-
+ * 实体类
+ * @author Administrator
+ *
+ */
 @Entity
-@Table(name = "tb_reply")
-public class Reply implements Serializable {
-    @Id
-    private String id;//编号
+@Table(name="tb_reply")
+public class Reply implements Serializable{
 
-    private String problemid;//问题ID
-    private String content;//回答内容
-    private java.util.Date createtime;//创建日期
-    private java.util.Date updatetime;//更新日期
-    private String userid;//回答人ID
-    private String nickname;//回答人昵称
+	@Id
+	private String id;//编号
 
 
-    public String getId() {
-        return id;
-    }
+	
+	private String problemid;//问题ID
+	private String content;//回答内容
+	private java.util.Date createtime;//创建日期
+	private java.util.Date updatetime;//更新日期
+	private String userid;//回答人ID
+	private String nickname;//回答人昵称
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public String getProblemid() {
-        return problemid;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setProblemid(String problemid) {
-        this.problemid = problemid;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getProblemid() {
+		return problemid;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setProblemid(String problemid) {
+		this.problemid = problemid;
+	}
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public Date getUpdatetime() {
-        return updatetime;
-    }
+	public Date getCreatetime() {
+		return createtime;
+	}
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 
-    public String getUserid() {
-        return userid;
-    }
+	public Date getUpdatetime() {
+		return updatetime;
+	}
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
 
-    public String getNickname() {
-        return nickname;
-    }
+	public String getUserid() {
+		return userid;
+	}
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 }

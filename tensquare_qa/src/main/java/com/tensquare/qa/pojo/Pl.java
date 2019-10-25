@@ -7,8 +7,9 @@ import java.io.Serializable;
 
 /**
  * @Author ysl
- * @Date 2019/9/22 10:51
- * @Description:
+ * @Date 2019/10/23 23:33
+ * @Description:    中间表 tb_pl  问题和标签中间表
+ *                  problemid+labelid ==> 联合主键
  **/
 
 @Entity

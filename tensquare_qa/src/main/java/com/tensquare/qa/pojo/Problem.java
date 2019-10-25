@@ -7,133 +7,134 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @Author ysl
- * @Date 2019/9/22 10:46
- * @Description:
- **/
-
+ * 实体类
+ * @author ysl
+ *
+ */
 @Entity
-@Table(name = "tb_problem")
-public class Problem implements Serializable {
+@Table(name="tb_problem")
+public class Problem implements Serializable{
 
-    @Id
-    private String id;//ID
-
-    private String title;//标题
-    private String content;//内容
-    private java.util.Date createtime;//创建日期
-    private java.util.Date updatetime;//修改日期
-    private String userid;//用户ID
-    private String nickname;//昵称
-    private Long visits;//浏览量
-    private Long thumbup;//点赞数
-    private Long reply;//回复数
-    private String solve;//是否解决
-    private String replyname;//回复人昵称
-    private java.util.Date replytime;//回复日期
+	@Id
+	private String id;//ID
 
 
-    public String getId() {
-        return id;
-    }
+	
+	private String title;//标题
+	private String content;//内容
+	private java.util.Date createtime;//创建日期
+	private java.util.Date updatetime;//修改日期
+	private String userid;//用户ID
+	private String nickname;//昵称
+	private Long visits;//浏览量
+	private Long thumbup;//点赞数
+	private Long reply;//回复数
+	private String solve;//是否解决
+	private String replyname;//回复人昵称
+	private java.util.Date replytime;//回复日期
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
-    public String getTitle() {
-        return title;
-    }
+	public String getId() {
+		return id;
+	}
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-    public String getContent() {
-        return content;
-    }
+	public String getTitle() {
+		return title;
+	}
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    public Date getCreatetime() {
-        return createtime;
-    }
+	public String getContent() {
+		return content;
+	}
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
-    }
+	public void setContent(String content) {
+		this.content = content;
+	}
 
-    public Date getUpdatetime() {
-        return updatetime;
-    }
+	public Date getCreatetime() {
+		return createtime;
+	}
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime = updatetime;
-    }
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
 
-    public String getUserid() {
-        return userid;
-    }
+	public Date getUpdatetime() {
+		return updatetime;
+	}
 
-    public void setUserid(String userid) {
-        this.userid = userid;
-    }
+	public void setUpdatetime(Date updatetime) {
+		this.updatetime = updatetime;
+	}
 
-    public String getNickname() {
-        return nickname;
-    }
+	public String getUserid() {
+		return userid;
+	}
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 
-    public Long getVisits() {
-        return visits;
-    }
+	public String getNickname() {
+		return nickname;
+	}
 
-    public void setVisits(Long visits) {
-        this.visits = visits;
-    }
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 
-    public Long getThumbup() {
-        return thumbup;
-    }
+	public Long getVisits() {
+		return visits;
+	}
 
-    public void setThumbup(Long thumbup) {
-        this.thumbup = thumbup;
-    }
+	public void setVisits(Long visits) {
+		this.visits = visits;
+	}
 
-    public Long getReply() {
-        return reply;
-    }
+	public Long getThumbup() {
+		return thumbup;
+	}
 
-    public void setReply(Long reply) {
-        this.reply = reply;
-    }
+	public void setThumbup(Long thumbup) {
+		this.thumbup = thumbup;
+	}
 
-    public String getSolve() {
-        return solve;
-    }
+	public Long getReply() {
+		return reply;
+	}
 
-    public void setSolve(String solve) {
-        this.solve = solve;
-    }
+	public void setReply(Long reply) {
+		this.reply = reply;
+	}
 
-    public String getReplyname() {
-        return replyname;
-    }
+	public String getSolve() {
+		return solve;
+	}
 
-    public void setReplyname(String replyname) {
-        this.replyname = replyname;
-    }
+	public void setSolve(String solve) {
+		this.solve = solve;
+	}
 
-    public Date getReplytime() {
-        return replytime;
-    }
+	public String getReplyname() {
+		return replyname;
+	}
 
-    public void setReplytime(Date replytime) {
-        this.replytime = replytime;
-    }
+	public void setReplyname(String replyname) {
+		this.replyname = replyname;
+	}
+
+	public Date getReplytime() {
+		return replytime;
+	}
+
+	public void setReplytime(Date replytime) {
+		this.replytime = replytime;
+	}
 }

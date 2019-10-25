@@ -6,49 +6,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
-import java.io.IOException;
-import java.util.Base64;
-
 
 /**
  * @Author ysl
- * @Date 2019/9/22 21:28
+ * @Date 2019/10/23 23:44
  * @Description:
  **/
 
 @Service
 public class ProblemService {
 
-
     @Autowired
     private ProblemDao problemDao;
 
-
     /**
-     * 根据标签id查询问题列表
-     * @param lableId
-     * @param page
-     * @param size
-     * @returnle
-     */
-    public Page<Problem> findNewListByLabelId(String lableId,int page,int size){
-        PageRequest pageRequest = PageRequest.of(page - 1, size);
-        return problemDao.findNewListByLabelId(lableId,pageRequest);
-    }
-
-
-    /**
-     * 根据标签Id查询热门问题列表
-     * @param lableId 标签ID
+     * 根据标签ID查询问题列表
+     * @param labelId 标签ID
      * @param page  页码
      * @param size  页大小
      * @return
      */
-    public Page<Problem> findHotListByLabelId(String lableId,int page,int size){
+    public Page<Problem> findNewListByLabelId(String labelId,int page,int size){
         PageRequest pageRequest = PageRequest.of(page - 1, size);
-        return problemDao.findHotListByLabelId(lableId,pageRequest);
+        return problemDao.findNewListByLabelId(labelId,pageRequest);
     }
 }
