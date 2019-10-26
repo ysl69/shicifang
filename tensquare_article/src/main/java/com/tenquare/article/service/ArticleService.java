@@ -7,6 +7,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Author ysl
  * @Date 2019/10/26 9:14
@@ -55,7 +57,7 @@ public class ArticleService {
         //如果缓存没有则到数据库查询并放入到缓存
         if (article == null){
             article = articleDao.findById(id).get();
-            redisTemplate.opsForValue().set("article_"+id,article);
+            redisTemplate.opsForValue().set("article_"+id,article,1,TimeUnit.DAYS);
         }
         return article;
     }
