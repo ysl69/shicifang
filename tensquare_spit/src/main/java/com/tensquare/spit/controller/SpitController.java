@@ -7,6 +7,7 @@ import entity.Result;
 import entity.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -87,6 +88,11 @@ public class SpitController {
     }
 
 
+
+    @Autowired
+    private RedisTemplate redisTemplate;
+
+
     /**
      * 点赞
      * @param id
@@ -94,7 +100,14 @@ public class SpitController {
      */
     @RequestMapping(value = "/thumbup/{id}",method = RequestMethod.PUT)
     public Result updateThumbup(@PathVariable String id){
+        //判断用户是否点过赞
+        String userid = "2023";// 后边我们会修改为当前登陆的用户
+        if (redisTemplate.opsForValue().get("thumbup_"+userid+"_"+ id)!=null){
+            return new Result(false,StatusCode.REPERROR,"你已经点过赞了");
+        }
+
         spitService.updateThumbup(id);
+        redisTemplate.opsForValue().set("thumbup_"+userid+"_"+ id,"1");
         return new Result(true,StatusCode.OK,"点赞成功");
     }
 }
