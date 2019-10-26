@@ -34,4 +34,15 @@ public class ArticleController {
         return new Result(true, StatusCode.OK,"审核成功");
     }
 
+
+    /**
+     * 点赞
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/thumbup/{id}",method = RequestMethod.PUT)
+    public Result updateThumbup(@PathVariable String id){
+        articleService.updateThumbup(id);
+        return new Result(true,StatusCode.OK,"点赞成功");
+    }
 }
