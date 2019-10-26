@@ -85,4 +85,16 @@ public class SpitController {
         return new Result(true,StatusCode.OK,"查询成功",new PageResult<>(pageList.getTotalElements(),
                 pageList.getContent()));
     }
+
+
+    /**
+     * 点赞
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/thumbup/{id}",method = RequestMethod.PUT)
+    public Result updateThumbup(@PathVariable String id){
+        spitService.updateThumbup(id);
+        return new Result(true,StatusCode.OK,"点赞成功");
+    }
 }

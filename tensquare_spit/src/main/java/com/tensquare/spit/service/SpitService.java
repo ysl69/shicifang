@@ -5,6 +5,10 @@ import com.tensquare.spit.pojo.Spit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
@@ -84,4 +88,26 @@ public class SpitService {
         PageRequest pageRequest = PageRequest.of(page-1, size);
         return spitDao.findByParentid(parentid, pageRequest);
     }
+
+
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+
+    /**
+     * 点赞
+     * @param id
+     */
+    public void updateThumbup(String id){
+        /*Spit spit = spitDao.findById(id).get();
+        spit.setThumbup(spit.getThumbup()+1);
+        spitDao.save(spit);*/
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(id));
+        Update update = new Update();
+        update.inc("thumbup",1);
+        mongoTemplate.updateFirst(query,update,"spit");
+    }
+
 }
