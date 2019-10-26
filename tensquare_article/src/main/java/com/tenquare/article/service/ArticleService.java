@@ -59,4 +59,24 @@ public class ArticleService {
         }
         return article;
     }
+
+
+    /**
+     * 修改
+     * @param article
+     */
+    public void update(Article article){
+        redisTemplate.delete("article_"+article.getId());//删除缓存
+        articleDao.save(article);
+    }
+
+
+    /**
+     * 删除
+     * @param id
+     */
+    public void deleteById(String id){
+        redisTemplate.delete("article_"+id);//删除缓存
+        articleDao.deleteById(id);
+    }
 }
