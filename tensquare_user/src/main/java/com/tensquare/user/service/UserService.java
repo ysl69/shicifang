@@ -1,10 +1,14 @@
 package com.tensquare.user.service;
 
+import com.tensquare.user.dao.UserDao;
+import com.tensquare.user.pojo.User;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import util.IdWorker;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -25,6 +29,11 @@ public class UserService {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    @Autowired
+    private IdWorker idWorker;
+
+    @Autowired
+    private UserDao userDao;
 
     /**
      * 发送短信验证码
@@ -49,5 +58,32 @@ public class UserService {
         map.put("mobile",mobile);
         map.put("code",code+"");
         rabbitTemplate.convertAndSend("sms",map);
+    }
+
+
+    /**
+     * 增加
+     * @param user 用户
+     * @param code 用户填写的验证码
+     */
+    public void add(User user,String code){
+        //判断验证码是否正确
+        String syscode = (String) redisTemplate.opsForValue().get("smscode" + user.getMobile());
+        //提取系统正确的验证码
+        if (syscode == null){
+            throw new RuntimeException("请点击获取短信验证码");
+        }
+        if (!syscode.equals(code)){
+            throw new RuntimeException("验证码输入不正确");
+        }
+        user.setId(idWorker.nextId()+"");
+        user.setFollowcount(0);//关注数
+        user.setFanscount(0);//粉丝数
+        user.setOnline(0L);//在线时长
+        user.setRegdate(new Date());//注册日期
+        user.setUpdatedate(new Date());//更新日期
+        user.setLastdate(new Date());//最后登录日期
+
+        userDao.save(user);
     }
 }
