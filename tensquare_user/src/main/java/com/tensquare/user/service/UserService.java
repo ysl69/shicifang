@@ -5,6 +5,7 @@ import com.tensquare.user.pojo.User;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import util.IdWorker;
 
@@ -34,6 +35,9 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     /**
      * 发送短信验证码
@@ -84,6 +88,26 @@ public class UserService {
         user.setUpdatedate(new Date());//更新日期
         user.setLastdate(new Date());//最后登录日期
 
+        //密码加密
+        String newpassword = encoder.encode(user.getPassword());
+        user.setPassword(newpassword);
+
         userDao.save(user);
+    }
+
+
+    /**
+     * 根据手机号和密码查询用户
+     * @param mobile
+     * @param password
+     * @return
+     */
+    public User findByMobileAndPassword(String mobile,String password){
+        User user = userDao.findByMobile(mobile);
+        if (user!=null && encoder.matches(password,user.getPassword())){
+            return user;
+        }else {
+            return null;
+        }
     }
 }
