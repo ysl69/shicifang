@@ -7,8 +7,10 @@ import entity.StatusCode;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,6 +30,9 @@ public class UserController {
 
     @Autowired
     private HttpServletRequest request;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     /**
      * 发送短信验证码
@@ -64,6 +69,13 @@ public class UserController {
         User user = userService.findByMobileAndPassword(loginMap.get("mobile"), loginMap.get("password"
         ));
         if (user!=null){
+            String token = jwtUtil.createJWT(user.getId(), user.getNickname(), "user");
+            Map map = new HashMap<>();
+            map.put("token",token);
+            //昵称
+            map.put("name",user.getNickname());
+            //头像
+            map.put("avatar",user.getAvatar());
             return new Result(true,StatusCode.OK,"登录成功");
         }else {
             return new Result(false,StatusCode.LOGINERROR,"用户名或密码错误");
