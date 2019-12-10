@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.tensquare.user.pojo.User;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -22,6 +23,8 @@ import entity.Result;
 import entity.StatusCode;
 import util.JwtUtil;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * 控制器层
  *
@@ -37,6 +40,9 @@ public class AdminController {
 
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private HttpServletRequest request;
 
 
     /**
@@ -116,6 +122,24 @@ public class AdminController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Result delete(@PathVariable String id) {
+        //获取头信息
+        String authHeader = request.getHeader("Authorization");
+        if (authHeader==null){
+            return new Result(false,StatusCode.ACCESSERROR,"权限不足");
+        }
+        if (!authHeader.startsWith("Bearer ")){
+            return new Result(false,StatusCode.ACCESSERROR,"权限不足");
+        }
+        //提取token
+        String token = authHeader.substring(7);
+        Claims claims = jwtUtil.parseJWT(token);
+        if (claims==null){
+            return new Result(false,StatusCode.ACCESSERROR,"权限不足");
+        }
+        if (!"admin".equals(claims.get("roles"))){
+            return new Result(false,StatusCode.ACCESSERROR,"权限不足");
+        }
+
         adminService.deleteById(id);
         return new Result(true, StatusCode.OK, "删除成功");
     }
@@ -127,13 +151,14 @@ public class AdminController {
     public Result login(@RequestBody Map map) {
         Admin admin = adminService.login((String) map.get("loginname"), (String) map.get("password"));
         if (admin == null) {
+            //生成token
+            String token = jwtUtil.createJWT(admin.getId(), admin.getLoginname(), "admin");
+            Map<String,Object> rsMap = new HashMap<>();
+            rsMap.put("admin",admin);
+            rsMap.put("token",token);
+            return new Result(true, StatusCode.OK, "管理员登录成功", rsMap);
+        }else {
             return new Result(false, StatusCode.ERROR, "管理员登录失败");
         }
-        //如果账号密码正确 生成token字符串
-        String adminToken = jwtUtil.createJWT(admin.getId(), admin.getLoginname(), "admin");
-        Map<String,Object> rsMap = new HashMap<>();
-        rsMap.put("admin",admin);
-        rsMap.put("token",adminToken);
-        return new Result(true, StatusCode.OK, "管理员登录成功", rsMap);
     }
 }
