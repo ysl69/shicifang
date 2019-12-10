@@ -22,6 +22,9 @@ public class ParseJwtTest {
                 .getBody();
         System.out.println("id:"+claims.getId());
         System.out.println("subject:"+claims.getSubject());
+        System.out.println("roles:"+claims.get("roles"));
+        System.out.println("logo:"+claims.get("logo"));
+
 
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println("签发时间:"+sdf.format(claims.getIssuedAt()));
