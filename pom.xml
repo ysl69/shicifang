@@ -15,6 +15,7 @@
         <module>rabbitmq</module>
         <module>tensquare_user</module>
         <module>tensquare_sms</module>
+        <module>jjwtDemo</module>
     </modules>
 
     <packaging>pom</packaging>
