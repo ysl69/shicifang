@@ -4,9 +4,11 @@ import com.tensquare.user.pojo.User;
 import com.tensquare.user.service.UserService;
 import entity.Result;
 import entity.StatusCode;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 /**
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private HttpServletRequest request;
 
     /**
      * 发送短信验证码
@@ -63,5 +68,21 @@ public class UserController {
         }else {
             return new Result(false,StatusCode.LOGINERROR,"用户名或密码错误");
         }
+    }
+
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    public Result delete(@PathVariable String id){
+        Claims claims = (Claims) request.getAttribute("admin_claims");
+        if (claims == null){
+            return new Result(true,StatusCode.ACCESSERROR,"无权访问");
+        }
+        userService.deleteById(id);
+        return new Result(true,StatusCode.OK,"删除成功");
     }
 }

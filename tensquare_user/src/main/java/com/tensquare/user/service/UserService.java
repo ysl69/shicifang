@@ -110,4 +110,13 @@ public class UserService {
             return null;
         }
     }
+
+
+    /**
+     * 删除
+     * @param id
+     */
+    public void deleteById(String id) {
+        userDao.deleteById(id);
+    }
 }
