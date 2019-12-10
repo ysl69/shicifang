@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import util.IdWorker;
 
 /**
  * @Author ysl
@@ -18,6 +19,9 @@ public class ProblemService {
 
     @Autowired
     private ProblemDao problemDao;
+
+    @Autowired
+    private IdWorker idWorker;
 
     /**
      * 根据标签ID查询问题列表
@@ -57,5 +61,15 @@ public class ProblemService {
     public Page<Problem> findWaitListByLabelId(String labelId,int page,int size){
         PageRequest pageRequest = PageRequest.of(page - 1, size);
         return problemDao.findWaitListByLabelId(labelId,pageRequest);
+    }
+
+
+    /**
+     * 增加
+     * @param problem
+     */
+    public void add(Problem problem) {
+        problem.setId(idWorker.nextId() + "");
+        problemDao.save(problem);
     }
 }
