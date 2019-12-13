@@ -16,6 +16,7 @@
         <module>tensquare_user</module>
         <module>tensquare_sms</module>
         <module>jjwtDemo</module>
+        <module>tensquare_eureka</module>
     </modules>
 
     <packaging>pom</packaging>
@@ -45,6 +46,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-dependencies</artifactId>
+            <version>Finchley.M9</version>
+            <type>pom</type>
+            <scope>import</scope>
         </dependency>
     </dependencies>
 

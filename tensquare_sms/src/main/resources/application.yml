@@ -11,3 +11,9 @@ aliyun:
     accessKeySecret: 不告诉你
     template_code: SMS_149385475
     sign_name: 传智播客
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:6868/eureka
+  instance:
+    prefer-ip-address: true
