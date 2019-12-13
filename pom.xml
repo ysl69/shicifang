@@ -17,6 +17,7 @@
         <module>tensquare_sms</module>
         <module>jjwtDemo</module>
         <module>tensquare_eureka</module>
+        <module>tensquare_friend</module>
     </modules>
 
     <packaging>pom</packaging>
