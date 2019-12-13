@@ -44,10 +44,11 @@ public class FriendController {
         //如果喜欢
         if (type.equals("1")){
             if (friendService.addFriend(claims.getId(),friendid)==0){
-                return new Result(false,StatusCode.REPERROR,"已经添加次好友");
+                return new Result(false,StatusCode.REPERROR,"已经添加此好友");
             }
         }else {
             //不喜欢
+            friendService.addNoFriend(claims.getId(),friendid);//向不喜欢列表中添加记录
         }
         return new Result(true,StatusCode.OK,"操作成功");
     }

@@ -1,7 +1,9 @@
 package com.tensquare.friend.service;
 
 import com.tensquare.friend.dao.FriendDao;
+import com.tensquare.friend.dao.NoFriendDao;
 import com.tensquare.friend.pojo.Friend;
+import com.tensquare.friend.pojo.NoFriend;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,9 @@ public class FriendService {
 
     @Autowired
     private FriendDao friendDao;
+
+    @Autowired
+    private NoFriendDao noFriendDao;
 
 
     @Transactional
@@ -40,4 +45,16 @@ public class FriendService {
         return 1;
     }
 
+
+    /**
+     * 向不喜欢列表中添加记录
+     * @param userid
+     * @param friendid
+     */
+    public void addNoFriend(String userid,String friendid){
+        NoFriend noFriend = new NoFriend();
+        noFriend.setUserid(userid);
+        noFriend.setFriendid(friendid);
+        noFriendDao.save(noFriend);
+    }
 }
