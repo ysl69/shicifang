@@ -52,4 +52,20 @@ public class FriendController {
         }
         return new Result(true,StatusCode.OK,"操作成功");
     }
+
+
+    /**
+     * 删除好友
+     * @param friendid
+     * @return
+     */
+    @RequestMapping(value = "/{friendid}",method = RequestMethod.DELETE)
+    public Result remove(@PathVariable String friendid){
+        Claims claims = (Claims) request.getAttribute("user_claims");
+        if (claims == null){
+            return new Result(false,StatusCode.ACCESSERROR,"无权访问");
+        }
+        friendService.deleteFriend(claims.getId(),friendid);
+        return new Result(true,StatusCode.OK,"删除成功");
+    }
 }

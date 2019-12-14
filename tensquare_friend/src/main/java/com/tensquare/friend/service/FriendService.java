@@ -57,4 +57,16 @@ public class FriendService {
         noFriend.setFriendid(friendid);
         noFriendDao.save(noFriend);
     }
+
+
+    /**
+     * 删除好友
+     * @param userid
+     * @param friendid
+     */
+    public void deleteFriend(String userid,String friendid){
+        friendDao.deleteFriend(userid,friendid);
+        friendDao.updateLike(friendid,userid,"0");
+        addNoFriend(userid,friendid);//向不喜欢表中添加记录
+    }
 }
