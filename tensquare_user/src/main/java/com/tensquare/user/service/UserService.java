@@ -131,4 +131,15 @@ public class UserService {
     public void incFanscount(String userid,int x){
         userDao.incFanscount(userid,x);
     }
+
+
+    /**
+     * 更新关注数
+     * @param userid
+     * @param x
+     */
+    @Transactional
+    public void incFollowcount(String userid,int x){
+        userDao.incFanscount(userid,x);
+    }
 }

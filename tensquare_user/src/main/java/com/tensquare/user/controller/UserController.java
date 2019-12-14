@@ -108,4 +108,15 @@ public class UserController {
     public void incFanscount(@PathVariable String userid,@PathVariable int x){
         userService.incFanscount(userid,x);
     }
+
+
+    /**
+     * 增加关注数
+     * @param userid
+     * @param x
+     */
+    @RequestMapping(value = "/{incFollow/{userid}/{x}",method = RequestMethod.POST)
+    public void incFollowcount(@PathVariable String userid,@PathVariable int x){
+        userService.incFollowcount(userid,x);
+    }
 }
