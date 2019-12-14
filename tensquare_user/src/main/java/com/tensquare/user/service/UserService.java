@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import util.IdWorker;
 
 import java.util.Date;
@@ -118,5 +119,16 @@ public class UserService {
      */
     public void deleteById(String id) {
         userDao.deleteById(id);
+    }
+
+
+    /**
+     * 更新粉丝数
+     * @param userid
+     * @param x
+     */
+    @Transactional
+    public void incFanscount(String userid,int x){
+        userDao.incFanscount(userid,x);
     }
 }
