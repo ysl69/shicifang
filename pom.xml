@@ -18,6 +18,7 @@
         <module>jjwtDemo</module>
         <module>tensquare_eureka</module>
         <module>tensquare_friend</module>
+        <module>tensquare_manager</module>
     </modules>
 
     <packaging>pom</packaging>
