@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: tensquare-config
+  cloud:
+    config:
+      server:
+        git:
+          url: https://gitee.com/yushilong/tensquare-config.git
+server: 12000
