@@ -7,3 +7,10 @@ spring:
         git:
           url: https://gitee.com/yushilong/tensquare-config.git
 server: 12000
+rabbitmq:
+  host: 192.168.25.143
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
